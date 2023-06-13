@@ -54,6 +54,7 @@ public class Main {
 
         System.out.println("Now Playing :");
         System.out.println(itr.next());
+        boolean wasNext = true;
 
         printmenu();
 
@@ -65,29 +66,54 @@ public class Main {
 
             switch(option){
                 case 1 :
+                    if(wasNext==false){
+                        itr.next();
+                        wasNext = true;
+                    }
                     if(itr.hasNext()){
                         System.out.println("Now Playing :");
                         System.out.println(itr.next());
+                        wasNext = true;
                     }
                     else{
                         System.out.println("No next song is present");
                     }
                     break;
                 case 2:
+                    if(wasNext == true){
+                        itr.previous();
+                        wasNext = false;
+                    }
                     if(itr.hasPrevious()){
                         System.out.println("Now Playing :");
                         System.out.println(itr.previous());
+                        wasNext = false;
                     }
                     else{
                         System.out.println("You are at the starting position");
                     }
                     break;
                 case 3:
+                    if(wasNext == true){
+                        if(itr.hasPrevious()){
+                            System.out.println("Now Playing :");
+                            System.out.println(itr.previous());
+                            wasNext = false;
+                        }
+                    }
+                    else{
+                        if(itr.hasNext()){
+                            System.out.println("Now Playing :");
+                            System.out.println(itr.next());
+                            wasNext = true;
+                        }
+                    }
                     break;
                 case 4:
                     PrintSongs(myPlayList);
                     break;
                 case 5:
+                    itr.remove();
                     break;
                 case 6:
                     printmenu();
